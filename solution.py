@@ -19,6 +19,9 @@ def solution(p: float, x: np.array) -> tuple:
     #       loc - scale * norm.ppf(alpha / 2)
     #return x.mean()/np.sqrt(41*z1), \
     #       x.mean()/np.sqrt(41*z2)
-    left_b = x.mean() - np.sqrt(np.var(x)) * norm.ppf(1 - alpha / 2) / np.sqrt(len(x))
-    right_b = x.mean() - np.sqrt(np.var(x)) * norm.ppf(alpha / 2) / np.sqrt(len(x))
-    return (31*left_b)/np.sqrt(41)/39, (31*right_b)/np.sqrt(41)/39
+    #left_b = x.mean() - np.sqrt(np.var(x)) * norm.ppf(1 - alpha / 2) / np.sqrt(len(x))
+    #right_b = x.mean() - np.sqrt(np.var(x)) * norm.ppf(alpha / 2) / np.sqrt(len(x))
+    #return (31*left_b)/np.sqrt(41)/39, (31*right_b)/np.sqrt(41)/39
+    z1 = expon.ppf(1-alpha/2,scale=2)
+    z2 = expon.ppf(alpha/2,scale=2)
+    return np.sqrt(np.mean(x*x))/np.sqrt(82) - z2*4/np.sqrt(len(x)),  np.sqrt(np.mean(x*x))/np.sqrt(82) + z2*4/np.sqrt(len(x)) 
